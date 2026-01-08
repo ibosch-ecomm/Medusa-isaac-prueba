@@ -16,11 +16,11 @@ RUN yarn install
 # Copiar el resto del código fuente
 COPY . .
 
-# Construir la aplicación con medusa build (incluye admin)
-RUN npx medusa build
+# Dar permisos de ejecución al script de inicio
+RUN chmod +x start.sh
 
 # Exponer el puerto de Medusa
 EXPOSE 9000
 
-# Comando para ejecutar migraciones y arrancar el servidor
-CMD ["sh", "-c", "npx medusa db:migrate && npx medusa start"]
+# Usar el script de inicio que hace build + migrate + start
+CMD ["./start.sh"]
